@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { listUsers } from "../actions/userActions";
+import { listUsers, deleteUser } from "../actions/userActions";
 
 const UserListScreem = ({ history }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const dispatch = useDispatch();
 
   const userList = useSelector((state) => state.userList);
@@ -15,16 +20,20 @@ const UserListScreem = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers());
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log(id);
+    dispatch(deleteUser(id));
+    setShow(false);
   };
 
   return (
@@ -69,10 +78,36 @@ const UserListScreem = ({ history }) => {
                   <Button
                     variant="danger"
                     className="btn-sm"
-                    onClick={deleteHandler(user._id)}
+                    onClick={handleShow}
                   >
                     <i className="fas fa-trash"></i>
                   </Button>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header>
+                      <Modal.Title>Are you sure?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>
+                        {" "}
+                        Do you really want to delete this record? This process
+                        cannot be undone.
+                      </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary disabled"
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => deleteHandler(user._id)}
+                      >
+                        Delete
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </td>
               </tr>
             ))}
