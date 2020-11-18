@@ -115,7 +115,13 @@ const ProfileScreen = ({ history }) => {
         ) : errorOrders ? (
           <Message variant="danger">{errorOrders}</Message>
         ) : (
-          <Table striped bordered hover responsive className="table-sm">
+          <Table
+            striped
+            bordered
+            hover
+            responsive
+            className="table-sm text-center"
+          >
             <thead>
               <tr>
                 <th>ID</th>
@@ -148,7 +154,7 @@ const ProfileScreen = ({ history }) => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button className="btn-sm" variant="light">
+                      <Button className="btn-sm" variant="info">
                         Details
                       </Button>
                     </LinkContainer>
