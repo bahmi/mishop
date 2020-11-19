@@ -70,44 +70,50 @@ const UserListScreem = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant="primary" className="btn-sm">
-                      <i className="fas fa-edit"></i>
-                    </Button>
-                  </LinkContainer>{" "}
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={handleShow}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header>
-                      <Modal.Title>Are you sure?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <p>
-                        {" "}
-                        Do you really want to delete this record? This process
-                        cannot be undone.
-                      </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary disabled"
-                        onClick={handleClose}
-                      >
-                        Cancel
-                      </Button>
+                  {userInfo._id === user._id ? (
+                    "Not available"
+                  ) : (
+                    <>
+                      <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                        <Button variant="primary" className="btn-sm">
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </LinkContainer>
                       <Button
                         variant="danger"
-                        onClick={() => deleteHandler(user._id)}
+                        className="btn-sm"
+                        onClick={handleShow}
                       >
-                        Delete
+                        <i className="fas fa-trash"></i>
                       </Button>
-                    </Modal.Footer>
-                  </Modal>
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header>
+                          <Modal.Title>Are you sure?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <p>
+                            {" "}
+                            Do you really want to delete this record? This
+                            process cannot be undone.
+                          </p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="secondary disabled"
+                            onClick={handleClose}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => deleteHandler(user._id)}
+                          >
+                            Delete
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
