@@ -78,7 +78,7 @@ const UserListScreem = ({ history }) => {
                         <Button variant="primary" className="btn-sm">
                           <i className="fas fa-edit"></i>
                         </Button>
-                      </LinkContainer>
+                      </LinkContainer>{" "}
                       <Button
                         variant="danger"
                         className="btn-sm"
