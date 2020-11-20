@@ -65,7 +65,7 @@ const OrderListScreem = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/order/${order._id}`}>
+                  <LinkContainer to={`/order/${order._id}`}>
                     <Button variant="primary" className="btn-sm">
                       Details
                     </Button>
