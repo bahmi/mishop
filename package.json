@@ -1,5 +1,5 @@
 {
-  "name": "proshop",
+  "name": "MiShop",
   "version": "1.0.0",
   "description": "MERN E-Commerce App",
   "main": "server.js",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahmi/proshop.git"
+    "url": "git+https://github.com/bahmi/mishop.git"
   },
   "author": "Bahadur Alam",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bahmi/proshop/issues"
+    "url": "https://github.com/bahmi/mishop/issues"
   },
-  "homepage": "https://github.com/bahmi/proshop#readme",
+  "homepage": "https://github.com/bahmi/mishop#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
@@ -32,7 +32,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
