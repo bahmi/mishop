@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+import { clearKey } from "../utils/cache.js";
 
 // @desc    fetch all products
 // @route   GET /api/products
@@ -20,7 +21,8 @@ const getProducts = asyncHandler(async (req, res) => {
   const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
     .limit(pageSize)
-    .skip(pageSize * (page - 1));
+    .skip(pageSize * (page - 1))
+    .cache();
 
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
@@ -47,7 +49,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   if (product) {
     await product.remove();
-
+    clearKey(Product.collection.collectionName);
     res.json({ message: "Product deleted successfully" });
   } else {
     res.status(404);
@@ -72,6 +74,7 @@ const createProduct = asyncHandler(async (req, res) => {
   });
 
   const createdProduct = await product.save();
+  clearKey(Product.collection.collectionName);
   res.status(201).json(createdProduct);
 });
 
@@ -101,6 +104,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.countInStock = countInStock;
 
     const updatedProduct = await product.save();
+    clearKey(Product.collection.collectionName);
     res.status(201).json(updatedProduct);
   } else {
     res.status(404);
@@ -142,6 +146,7 @@ const createProductReview = asyncHandler(async (req, res) => {
       product.reviews.length;
 
     await product.save();
+    clearKey(Product.collection.collectionName);
     res.status(201).json({ message: "Review added" });
   } else {
     res.status(404);
