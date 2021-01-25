@@ -10,19 +10,32 @@ import {
   updateUser,
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
+import { validateRequest as schemaValidator } from "../middleware/validateMiddleware.js";
+import {
+  registerUserSchema,
+  authUserSchema,
+  updateUserProfileSchema,
+  updateUserSchema,
+} from "../schemas/userSchemas.js";
 
 const router = express.Router();
 
-router.route("/").post(registerUser).get(protect, admin, getUsers);
-router.post("/login", authUser);
+router
+  .route("/")
+  .post(schemaValidator(registerUserSchema), registerUser)
+  .get(protect, admin, getUsers);
+
+router.post("/login", schemaValidator(authUserSchema), authUser);
+
 router
   .route("/profile")
   .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
+  .put(protect, schemaValidator(updateUserProfileSchema), updateUserProfile);
+
 router
   .route("/:id")
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
-  .put(protect, admin, updateUser);
+  .put(protect, admin, schemaValidator(updateUserSchema), updateUser);
 
 export default router;
