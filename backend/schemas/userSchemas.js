@@ -14,14 +14,16 @@ const authUserSchema = Joi.object().keys({
 
 const updateUserProfileSchema = Joi.object().keys({
   name: Joi.string()
-    .regex(/^[a-zA-Z ]*$/, "Alphabets and space only")
+    .regex(/^[a-zA-Z ]*$/, "alphabet and space only")
     .allow(null, ""),
   email: Joi.string().email().allow(null, ""),
   password: Joi.string().allow(null, ""),
 });
 
 const updateUserSchema = Joi.object().keys({
-  name: Joi.string().allow(null, ""),
+  name: Joi.string()
+    .regex(/^[a-zA-Z ]*$/, "alphabet and space only")
+    .allow(null, ""),
   email: Joi.string().email().allow(null, ""),
   isAdmin: Joi.boolean().allow(null),
 });
