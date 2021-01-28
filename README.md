@@ -1,6 +1,10 @@
 # MiShop
 An electronic commerce platform which facilitates online transaction of goods.
 
+## Live Demo
+Check out the live demo at [mishopp.herokuapp.com](https://mishopp.herokuapp.com/)  
+Note: The site may take a few seconds to load since it is running on a free [Heroku Dyno](https://www.heroku.com/dynos).
+
 ## Prerequisite
 You need to have [Node.js (12+)](https://nodejs.org/en/) installed to run this project
 
@@ -28,10 +32,6 @@ PAYPAL_CLIENT_ID = YOUR_PAYPAL_CLIENT_ID
 ```
 npm run dev
 ```
-
-## Live Demo
-Check out the live demo at [mishopp.herokuapp.com](https://mishopp.herokuapp.com/)  
-Note: The site may take a few seconds to load since it is running on a free [Heroku Dyno](https://www.heroku.com/dynos).
 
 ## Built With
 - [React](https://reactjs.org/) - Frontend Library
