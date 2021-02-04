@@ -26,23 +26,30 @@ h3 {
 .carousel-item.active {
   display: flex;
 }
+
 .carousel-caption {
-  position: absolute;
-  top: 0;
+  /* position: relative; */
+  /* vertical-align: middle; */
+  /* top: 0; */
 }
 
 .carousel-caption h2 {
   color: #fff;
 }
 
+.carousel-caption h5 {
+  color: #fff;
+}
+
 .carousel img {
-  height: 300px;
+  /* height: 300px; */
   padding: 30px;
   margin: 40px;
-  border-radius: 50%;
+  border-radius: 10%;
   margin-left: auto;
   margin-right: auto;
 }
+
 .carousel a {
   margin: 0 auto;
 }
