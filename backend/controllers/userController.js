@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import { paginate } from "../utils/pagination.js";
 
 // @desc    Auth user and get token
 // @route   POST /api/users/login
@@ -115,9 +116,17 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/users
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({});
+  const page = Number(req.query.page) || 1;
+  const pageSize = 10;
 
-  res.json(users);
+  const count = await User.countDocuments({});
+
+  const users = await User.find({}).sort({ _id: -1 });
+
+  const pager = paginate(count, page, pageSize);
+  const pageOfItems = users.slice(pager.startIndex, pager.endIndex + 1);
+
+  res.json({ pager, pageOfItems });
 });
 
 // @desc    Delete user
